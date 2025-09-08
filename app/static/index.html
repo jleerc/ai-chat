@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ADK Streaming Test (Audio)</title>
+    <script src="/static/js/app.js" type="module"></script>
+  </head>
+
+  <body>
+    <h1>ADK Streaming Test</h1>
+    <div
+      id="messages"
+      style="height: 300px; overflow-y: auto; border: 1px solid black"></div>
+    <br />
+
+    <form id="messageForm">
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message" />
+      <button type="submit" id="sendButton" disabled>Send</button>
+      <button type="button" id="startAudioButton">Start Audio</button>
+      <button type="button" id="startScreenButton">Start Screen Share</button>
+      <button type="button" id="stopScreenButton" disabled>Stop Screen</button>
+    </form>
+    <div>
+      <video id="screenPreview" autoplay muted playsinline style="max-width: 100%; border: 1px solid #ccc; display:none;"></video>
+    </div>
+  </body>
+
+</html>
