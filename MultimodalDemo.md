@@ -1,5 +1,5 @@
 ---
-title: "[]{#_nj23sjpj5u97 .anchor}Multimodal Chatbot Demo"
+Multimodal Chatbot Demo
 ---
 
 # Goal
@@ -157,3 +157,4 @@ into agents built with ADK.
 -   [[https://github.com/google/adk-samples]{.underline}](https://github.com/google/adk-samples)
 
 -   [[https://medium.com/google-cloud/google-adk-vertex-ai-live-api-125238982d5e]{.underline}](https://medium.com/google-cloud/google-adk-vertex-ai-live-api-125238982d5e)
+
