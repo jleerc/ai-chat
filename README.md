@@ -128,7 +128,7 @@ into agents built with ADK.
 
     a.  Start fast api: python -m uvicorn main:app \--host 127.0.0.1
        - \--port 8000 \--reload then go to
-       - [[http://127.0.0.1:8000]{.underline}](http://127.0.0.1:8000)
+       - http://127.0.0.1:8000
 
     b.  OR adk web
 
