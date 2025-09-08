@@ -1,6 +1,0 @@
-google-generativeai
-google-cloud-aiplatform
-google-adk
-websockets
-python-dotenv
-llama_index
