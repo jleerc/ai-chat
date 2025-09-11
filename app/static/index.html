@@ -129,7 +129,6 @@
       }
       #screenPreview { max-width: 100%; border: 1px solid var(--border); border-radius: 12px; display:none; }
     </style>
-    <script src="/static/js/app.js" type="module"></script>
   </head>
 
   <body>
@@ -142,6 +141,9 @@
         <div id="agentState" class="state">
           <span class="dot idle"></span>
           <span class="label">Idle</span>
+        </div>
+        <div id="micState" class="state" style="display: none;">
+          <span class="label">Mic: <span id="micName">Not selected</span></span>
         </div>
       </div>
 
@@ -158,12 +160,12 @@
         </form>
       </div>
 
-      
-
       <div class="card screen">
         <video id="screenPreview" autoplay muted playsinline></video>
       </div>
     </div>
+
+    <script src="/static/js/app.js" type="module"></script>
   </body>
 
 </html>

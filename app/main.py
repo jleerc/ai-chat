@@ -29,6 +29,7 @@ from google.genai.types import (
 
 from google.adk.runners import InMemoryRunner
 from google.adk.agents import LiveRequestQueue
+from google.adk.agents.live_request import LiveRequest
 from google.adk.agents.run_config import RunConfig
 from google.genai import types
 
@@ -38,7 +39,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from google_search_agent.agent import root_agent
-from csagent.agent import root_agent as csagent_root_agent  
+from csagent.agent import root_agent as csagent_root_agent
 
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
 
@@ -71,7 +72,8 @@ async def start_agent_session(user_id, is_audio=False):
     # Live models expect a single response modality
     run_config = RunConfig(
         response_modalities=["AUDIO"] if is_audio else ["TEXT"],
-        session_resumption=types.SessionResumptionConfig()
+        session_resumption=types.SessionResumptionConfig(),
+        support_cfc=False,
     )
 
     # Create a LiveRequestQueue for this session
@@ -198,6 +200,8 @@ async def sse_endpoint(user_id: int, is_audio: str = "false"):
                 yield data
         except Exception as e:
             print(f"Error in SSE stream: {e}")
+            import traceback
+            traceback.print_exc()
         finally:
             cleanup()
 
@@ -239,11 +243,14 @@ async def send_message_endpoint(user_id: int, request: Request):
         # Send audio chunks and mark start of utterance explicitly on first chunk
         if not state.activity_started:
             state.activity_started = True
-            state.queue.send_realtime(
-                Blob(data=decoded_data, mime_type=mime_type)
+            state.queue.send(
+                LiveRequest(
+                    blob=Blob(data=decoded_data, mime_type=mime_type),
+                    activity_start=True,
+                )
             )
         else:
-            state.queue.send_realtime(Blob(data=decoded_data, mime_type=mime_type))
+            state.queue.send(LiveRequest(blob=Blob(data=decoded_data, mime_type=mime_type)))
         print(f"[CLIENT TO AGENT]: audio/pcm: {len(decoded_data)} bytes")
 
         # Debounce end-of-utterance: if no audio arrives for ~200ms, signal activity_end
@@ -253,8 +260,11 @@ async def send_message_endpoint(user_id: int, request: Request):
             try:
                 await asyncio.sleep(0.15)
                 # Send explicit activity_end to finalize the turn
-                state.queue.send_realtime(
-                    Blob(data=b"", mime_type=current_mime)
+                state.queue.send(
+                    LiveRequest(
+                        blob=Blob(data=b"", mime_type=current_mime),
+                        activity_end=True,
+                    )
                 )
                 state.activity_started = False
             except asyncio.CancelledError:
