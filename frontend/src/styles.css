@@ -1,0 +1,26 @@
+:root{--bg:#0b1020;--panel:#121a33;--muted:#98a2b3;--text:#e5e7eb;--brand:#6ee7ff;--brand2:#a78bfa;--danger:#ef4444}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,rgba(167,139,250,.2),transparent),radial-gradient(1000px 500px at -10% 10%,rgba(110,231,255,.15),transparent),var(--bg);color:var(--text)}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 10px 40px rgba(110,231,255,.25)}
+.title{font-weight:700;letter-spacing:.3px}
+.grid{display:grid;grid-template-columns:360px 1fr;gap:16px}
+.panel{background:rgba(18,26,51,.8);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(12px);border-radius:14px;box-shadow:0 6px 30px rgba(0,0,0,.35)}
+.panel .head{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between}
+.panel .body{padding:14px;max-height:70vh;overflow:auto}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:#182247;color:var(--text);border:1px solid rgba(255,255,255,.08);padding:10px 12px;border-radius:10px;cursor:pointer;transition:.2s}
+.btn:hover{background:#1f2a57}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#001222;border:0}
+.input,select{background:#0d1530;color:var(--text);border:1px solid rgba(255,255,255,.1);padding:10px 12px;border-radius:10px;width:100%}
+.chat{display:flex;flex-direction:column;height:100%}
+.messages{flex:1;display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 12px;border-radius:12px;max-width:85%}
+.msg.user{align-self:flex-end;background:#203064}
+.msg.ai{align-self:flex-start;background:#111a36;border:1px solid rgba(255,255,255,.06)}
+.inputRow{display:flex;gap:8px;margin-top:8px}
+.videoWrap video{width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+.badge{font-size:12px;color:var(--muted)}
