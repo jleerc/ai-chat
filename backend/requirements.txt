@@ -1,0 +1,11 @@
+# Core dependencies - let pip resolve versions
+google-adk
+google-genai
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+websockets
+google-auth
+requests
+Pillow
